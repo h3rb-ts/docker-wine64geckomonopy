@@ -6,6 +6,9 @@ ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV WINEDEBUG fixme-all,warn+cursor
+ENV WINEPREFIX /root/prefix64
+ENV WINEARCH win64
+ENV WINE_DOWNLOAD_PATH=~/.cache/wine
 
 RUN sed -i'' 's/archive\.ubuntu\.com/us\.archive\.ubuntu\.com/' /etc/apt/sources.list
 
@@ -23,7 +26,8 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && apt-get -y install winehq-stable winetricks && \
     apt-get -y full-upgrade && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Download Wine's Mono and Gecko
+
+# Download Wine's Mono and Gecko -- doesn't detect :(
 #RUN mkdir -p /opt/wine-stable/share/wine/mono && \
 #    wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C /opt/wine-stable/share/wine/mono && \
 #    mv /opt/wine-stable/share/wine/mono/wine-mono-4.9.4/* /opt/wine-stable/share/wine/mono && \
@@ -31,16 +35,13 @@ RUN dpkg --add-architecture i386 && \
 #    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
 #    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
 
-# Download target
-ENV WINE_DOWNLOAD_PATH=~/.cache/wine
+# Download Wine's Mono and Gecko
 RUN mkdir -p $WINE_DOWNLOAD_PATH/mono && \
     wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C $WINE_DOWNLOAD_PATH/mono && \
     mkdir -p $WINE_DOWNLOAD_PATH/gecko && \
     wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
     wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
     
-ENV WINEPREFIX /root/prefix64
-ENV WINEARCH win64
 ENV DISPLAY :0
 
 # Install novnc - but expose on dev copy only
