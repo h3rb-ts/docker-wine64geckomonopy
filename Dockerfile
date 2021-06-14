@@ -38,11 +38,9 @@ RUN dpkg --add-architecture i386 && \
 # Download Wine's Mono and Gecko
 RUN mkdir -p $WINE_DOWNLOAD_PATH/mono && \
     wget -O $WINE_DOWNLOAD_PATH/mono/wine-mono-4.9.4.msi https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi && \
-    wine msiexec /i $WINE_DOWNLOAD_PATH/mono/wine-mono-4.9.4.msi && \
     mkdir -p $WINE_DOWNLOAD_PATH/gecko && \
     wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
     wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi && \
-    wine msiexec /i $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi
     
 ENV DISPLAY :0
 
