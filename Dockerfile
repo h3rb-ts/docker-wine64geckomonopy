@@ -24,8 +24,12 @@ RUN dpkg --add-architecture i386 && \
     apt-get -y full-upgrade && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Download Wine's Mono and Gecko
-RUN mkdir -p /opt/wine-stable/share/wine/mono && wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C /opt/wine-stable/share/wine/mono && \
-    mkdir -p /opt/wine-stable/share/wine/gecko && wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
+RUN mkdir -p /opt/wine-stable/share/wine/mono && \
+    wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C /opt/wine-stable/share/wine/mono && \
+    mv /opt/wine-stable/share/wine/mono/wine-mono-4.9.4/* /opt/wine-stable/share/wine/mono
+    mkdir -p /opt/wine-stable/share/wine/gecko && \
+    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
+    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
 
 ENV WINEPREFIX /root/prefix64
 ENV WINEARCH win64
