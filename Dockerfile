@@ -37,10 +37,10 @@ RUN dpkg --add-architecture i386 && \
 
 # Download Wine's Mono and Gecko
 RUN mkdir -p $WINE_DOWNLOAD_PATH/mono && \
-    wget -O --progress=bar:force:noscroll $WINE_DOWNLOAD_PATH/mono/wine-mono-4.9.4.msi https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi && \
+    wget --progress=bar:force:noscroll -O  $WINE_DOWNLOAD_PATH/mono/wine-mono-4.9.4.msi https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi && \
     mkdir -p $WINE_DOWNLOAD_PATH/gecko && \
-    wget -O --progress=bar:force:noscroll $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
-    wget -O --progress=bar:force:noscroll $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi && \
+    wget --progress=bar:force:noscroll -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
+    wget --progress=bar:force:noscroll -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi && \
     echo "Downloaded Mono and Gecko to $WINE_DOWNLOAD_PATH"
     
 ENV DISPLAY :0
