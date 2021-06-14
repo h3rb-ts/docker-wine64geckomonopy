@@ -30,11 +30,14 @@ RUN dpkg --add-architecture i386 && \
 #    mkdir -p /opt/wine-stable/share/wine/gecko && \
 #    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
 #    wget -O /opt/wine-stable/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
-RUN mkdir -p /root/prefix64/share/wine/mono && \
-    wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C /root/prefix64/share/wine/mono && \
-    mkdir -p /root/prefix64/share/wine/gecko && \
-    wget -O /root/prefix64/share/wine/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
-    wget -O /root/prefix64/share/wine/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
+
+# Download target
+ENV WINE_DOWNLOAD_PATH=~/.cache/wine
+RUN mkdir -p $WINE_DOWNLOAD_PATH/mono && \
+    wget -O - https://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-bin-4.9.4.tar.gz |tar -xzv -C $WINE_DOWNLOAD_PATH/mono && \
+    mkdir -p $WINE_DOWNLOAD_PATH/gecko && \
+    wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi && \
+    wget -O $WINE_DOWNLOAD_PATH/gecko/wine-gecko-2.47.1-x86_64.msi https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi 
     
 ENV WINEPREFIX /root/prefix64
 ENV WINEARCH win64
