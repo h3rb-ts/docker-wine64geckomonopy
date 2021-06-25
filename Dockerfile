@@ -13,11 +13,12 @@ ENV WINE_DOWNLOAD_PATH=~/.cache/wine
 RUN sed -i'' 's/archive\.ubuntu\.com/us\.archive\.ubuntu\.com/' /etc/apt/sources.list
 
 RUN dpkg --add-architecture i386 && \
-    apt-get update && apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 patch && \
+    apt-get update && apt-get -y install python2 python-is-python2 xvfb x11vnc xdotool wget tar supervisor net-tools fluxbox gnupg2 patch  && \
     DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends \
         apt-transport-https ca-certificates cabextract git gosu gpg-agent p7zip pulseaudio pulseaudio-utils \
     libc6-dev-i386 libodbc1 libodbc1:i386 libodbc1 libsqliteodbc vim sqlite3 fvwm tzdata unzip wget	winbind \
-        xvfb xvkbd python3 nano bash curl python3 python3-pip dos2unix gdal-bin zenity && \
+        xvfb xvkbd python3 nano bash curl python3 python3-pip dos2unix gdal-bin zenity \
+         xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic xfonts-efont-unicode xfonts-efont-unicode-ib && \
     export CPLUS_INCLUDE_PATH=/usr/include/gdal && \
     export C_INCLUDE_PATH=/usr/include/gdal && \
     pip3 install --upgrade pip setuptools && \
