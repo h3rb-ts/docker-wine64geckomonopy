@@ -18,7 +18,7 @@ RUN dpkg --add-architecture i386 && \
         apt-transport-https ca-certificates cabextract git gosu gpg-agent p7zip pulseaudio pulseaudio-utils \
     libc6-dev-i386 libodbc1 libodbc1:i386 libodbc1 libsqliteodbc vim sqlite3 fvwm tzdata unzip wget	winbind \
         xvfb xvkbd python3 nano bash curl python3 python3-pip dos2unix gdal-bin zenity \
-         xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic xfonts-efont-unicode xfonts-efont-unicode-ib && \
+         xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-encodings xfonts-cyrillic xfonts-efont-unicode xfonts-efont-unicode-ib && \
     export CPLUS_INCLUDE_PATH=/usr/include/gdal && \
     export C_INCLUDE_PATH=/usr/include/gdal && \
     pip3 install --upgrade pip setuptools && \
